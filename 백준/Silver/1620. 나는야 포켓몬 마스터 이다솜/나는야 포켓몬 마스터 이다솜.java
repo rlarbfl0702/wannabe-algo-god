@@ -35,10 +35,10 @@ public class Main {
             String s = br.readLine();
 
             // 테스트하는 문제가 번호인지 이름인지 알기 위해서
-            // 첫 문자를 떼서 아스키문자로 비교하기 위해 변환
+            // 첫 문자를 떼서 아스키코드로 비교하기 위해 변환
             int ch = (int)s.charAt(0);
 
-            // 아스키문자로 비교해서 대문자일 경우, 
+            // 아스키코드로 비교해서 대문자일 경우,
             // 도감에서 key 값인 이름으로 value 값인 번호 찾아서 저장
             if((65 <= ch) && (ch <= 90)){
                 int n = poket.get(s);
@@ -57,7 +57,3 @@ public class Main {
         System.out.println(sb);
     }
 }
-
-
-
-
