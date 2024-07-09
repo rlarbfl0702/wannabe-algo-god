@@ -8,33 +8,39 @@ public class Main {
         StringTokenizer st;
 
         int M = Integer.parseInt(br.readLine());
-        boolean[] S = new boolean[21];
+        int num = 0;
 
         for(int i=0; i<M; i++){
             st = new StringTokenizer(br.readLine());
             String command = st.nextToken();
 
             if(command.equals("add")){
-                int x = Integer.parseInt(st.nextToken());
-                S[x] = true;
+                int x = Integer.parseInt(st.nextToken())-1;
+                num |= 1 << x;
             }
             else if(command.equals("remove")){
-                int x = Integer.parseInt(st.nextToken());
-                S[x] = false;
+                int x = Integer.parseInt(st.nextToken())-1;
+                num &= ~(1 << x);
             }
             else if(command.equals("check")){
-                int x = Integer.parseInt(st.nextToken());
-                sb.append(S[x] ? 1 : 0).append('\n');
+                int x = Integer.parseInt(st.nextToken())-1;
+                sb.append((num & 1 << x) == 1 << x ? 1 : 0).append('\n');
             }
             else if(command.equals("toggle")){
-                int x = Integer.parseInt(st.nextToken());
-                S[x] = !S[x];
+                int x = Integer.parseInt(st.nextToken())-1;
+                boolean flag = (num & 1 << x) == 1 << x;
+                if(flag){
+                    num &= ~(1 << x);
+                }
+                else{
+                    num |= 1 << x;
+                }
             }
             else if(command.equals("all")){
-                Arrays.fill(S, true);
+                num = ~( 1 << 22 );
             }
             else{
-                S = new boolean[21];
+                num = 0;
             }
         }
         System.out.println(sb);
