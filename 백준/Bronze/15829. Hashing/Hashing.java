@@ -21,7 +21,7 @@ public class Main {
         }
 
         int hash_cnt = 0;
-        int result = 0;
+        long result = 0;
 
         for(int i = 0; i < s.length(); i++){
             // i번째 문자를 아스키코드로 변환
@@ -30,8 +30,19 @@ public class Main {
             // 변환한 아스키코드를 key 값으로 해당 해시 값인 value를 찾음
             int h = hash.get(c);
 
-            // 해시 값 * 31^(숫자 해당 순번(0부터 시작))
-            result = result + (h * (int)Math.pow(31, hash_cnt));
+            long po = 1;
+            // 해시 값 * 31^(숫자 해당 순번(0부터 시작)
+            for(int j = 0; j < hash_cnt; j++){
+                // 31을 계속 곱해준 후, 오버플로우가 나는 것을 방지하기 위해
+                // 1234567891로 나눈 나머지
+                po = (po * 31) % 1234567891;
+            }
+
+            // 나온 31 제곱값과 해시 값을 곱해줌
+            po = h * po;
+
+            // 더한수도 오버플로우가 날 수 있으므로 1234567891로 나눠줌
+            result = (result + po) % 1234567891;
 
             // 숫자 순번 + 1
             hash_cnt = hash_cnt + 1;
