@@ -10,7 +10,7 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        Map<String, Integer> map = new TreeMap<>();
+        Map<String, Integer> map = new HashMap<>();
 
         for(int i=0; i<N; i++) {
             map.put(br.readLine(), 1);
