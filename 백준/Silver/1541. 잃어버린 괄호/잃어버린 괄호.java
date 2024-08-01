@@ -5,60 +5,18 @@ public class Main {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str = br.readLine();
-        StringBuilder sb = new StringBuilder();
+        String[] arr = br.readLine().split("-");
+        int result = 0;
 
-        int index = 0;
-        int check = 0;
-        for(int i=0; i<str.length(); i++) {
-            if(str.charAt(i) == '-' || str.charAt(i) == '+') {
-                break;
-            }
-            sb.append(str.charAt(i));
-            check++;
-        }
-
-        if(check == str.length()){
-            System.out.println(sb);
-            return;
-        }
-        int result = Integer.parseInt(sb.toString());
-        sb = new StringBuilder();
-
-        boolean foundMinus = false;
-        boolean startCnt = false;
-
-        char tmp = ' ';
-
-
-        while(index < str.length()) {
-            char c = str.charAt(index);
-            if(c == '+' || c == '-') {
-                if(startCnt) {
-                    if (tmp == '-' || foundMinus) {
-                        result -= Integer.parseInt(sb.toString());
-                    } else {
-                        result += Integer.parseInt(sb.toString());
-                    }
-                    sb = new StringBuilder();
+        for(int i=0; i<arr.length; i++) {
+            for (String num : arr[i].split("\\+")) {
+                if(i==0) {
+                    result += Integer.parseInt(num);
                 }
-                if(c == '-') {
-                    foundMinus = true;
+                else{
+                    result -= Integer.parseInt(num);
                 }
-                tmp = c;
-                startCnt = true;
             }
-            else if(startCnt) {
-                sb.append(str.charAt(index));
-            }
-            index++;
-        }
-
-        if(foundMinus) {
-            result -= Integer.parseInt(sb.toString());
-        }
-        else{
-            result += Integer.parseInt(sb.toString());
         }
         System.out.println(result);
     }
