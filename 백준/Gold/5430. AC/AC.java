@@ -8,56 +8,64 @@ public class Main {
 
         int T = Integer.parseInt(br.readLine());
         for(int t=0; t<T; t++) {
-            Deque<Integer> deque = new ArrayDeque<>();
             String command = br.readLine();
             int n = Integer.parseInt(br.readLine());
             String numbers = br.readLine();
 
-            if (n > 0) {
-                String[] numArr = numbers.substring(1, numbers.length() - 1).split(",");
-                for (String num : numArr) {
-                    deque.addLast(Integer.parseInt(num));
-                }
-            }
-
+            int start = 0;
+            int end = n;
             boolean isReversed = false;
             boolean flag = false;
-            for(char c: command.toCharArray()) {
-                if(c == 'R') {
-                    isReversed = !isReversed;
+            
+            if (n > 0) {
+                String[] numArr = numbers.substring(1, numbers.length() - 1).split(",");
+                for(int i=0; i<command.length(); i++) {
+                    if(command.charAt(i) == 'R') {
+                        isReversed = !isReversed;
+                    }
+                    else {
+                        if(start == end){
+                            flag = true;
+                            break;
+                        }
+                        if(isReversed) {
+                            end--;
+                        }
+                        else {
+                            start++;
+                        }
+                    }
+                }
+                if(flag) {
+                    sb.append("error").append('\n');
                 }
                 else {
-                    if(deque.isEmpty()) {
-                        flag = true;
-                        break;
-                    }
+                    sb.append('[');
                     if(isReversed) {
-                        deque.removeLast();
+                        for(int i=end-1; i>=start; i--) {
+                            sb.append(numArr[i]);
+                            if(i != start) {
+                                sb.append(',');
+                            }
+                        }
                     }
                     else {
-                        deque.removeFirst();
+                        for(int i=start; i<end; i++) {
+                            sb.append(numArr[i]);
+                            if(i != end-1) {
+                                sb.append(',');
+                            }
+                        }
                     }
+                    sb.append(']').append('\n');
                 }
-            }
-            if(flag) {
-                sb.append("error").append('\n');
             }
             else {
-                sb.append('[');
-                int count = 0;
-                while(!deque.isEmpty()) {
-                    if(count != 0) {
-                        sb.append(',');
-                    }
-                    if(isReversed) {
-                        sb.append(deque.removeLast());
-                    }
-                    else {
-                        sb.append(deque.removeFirst());
-                    }
-                    count++;
+                if (command.contains("D")) {
+                    sb.append("error\n");
+                } else {
+                    sb.append("[]\n");
                 }
-                sb.append(']').append('\n');
             }
         }
         System.out.println(sb);
