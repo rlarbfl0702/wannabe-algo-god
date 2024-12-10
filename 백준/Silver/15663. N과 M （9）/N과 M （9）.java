@@ -35,6 +35,12 @@ public class Main {
         Arrays.sort(arr);
 
         // 조합 저장할 TreeSet
+        // 배열의 경우, 기본 비교가 되지 않으므로 Comparator을 사용하여 비교
+        // 인덱스 0부터 비교하여서 a의 배열 i번째 값과 b의 i번째 배열 값이 다르다면
+        // 작은 값이 오도록 정렬, Integer.compare(x, y)가 x - y와 같은 역할을 함
+        // y가 더 크면 음수가 반환돼서 x가 먼저 되고 
+        // x가 더 크다면 양수가 반환되므로 y가 먼저 반환됨
+        // for문이 끝날때까지 모든 요소가 같다면 동일한 배열이므로, 0을 반환
         dic = new TreeSet<>((a, b) -> {
             for(int i = 0; i < a.length; i++){
                 if(a[i] != b[i]){
@@ -68,6 +74,9 @@ public class Main {
         // 만든 조합의 길이가 M크기에 도달한다면
         // 해당 조합을 TreeSet에 저장
         if(n == d){
+            // array의 복사본을 TreeSet에 저장
+            // 복사본을 저장하는 이유는 array 배열 자체를 저장해버리면
+            // 최신값으로 계속 갱신돼서 마지막 값만 출력되기 때문
             dic.add(array.clone());
 
             return;
