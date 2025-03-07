@@ -100,15 +100,6 @@ public class Main{
             return false;
         }
 
-        // 가장 왼쪽(또는 위쪽) 돌 찾기
-        int startx = x;
-        int starty = y;
-
-//        while(isValid(startx - dx[direction], starty - dy[direction]) && map[startx - dx[direction]][starty - dy[direction]] == color){
-//            startx -= dx[direction];
-//            starty -= dy[direction];
-//        }
-
         return true;
     }
 
