@@ -28,9 +28,9 @@ public class Main {
             }
         }
 
-        for(int i = 1; i < N; i++){
+        for(int i = 1; i < N/2+1; i++){
             visited = new boolean[N + 1];
-            
+
             DFS(0, i, 1);
         }
 
