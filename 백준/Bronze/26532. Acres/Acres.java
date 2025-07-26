@@ -6,13 +6,12 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int total = N * M;
-
-        int result = (int)Math.ceil((total / 4840.0) / 5.0);
+        int size = N*M;
+        int data = (int) Math.ceil((double) size/4840);
+        int result = (int) Math.ceil((double) data/5);
 
         System.out.println(result);
     }
