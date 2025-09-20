@@ -1,4 +1,6 @@
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class Main {
@@ -7,9 +9,11 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        double A = Double.parseDouble(st.nextToken());
-        double B = Double.parseDouble(st.nextToken());
+        BigDecimal A = new BigDecimal(st.nextToken());
+        BigDecimal B = new BigDecimal(st.nextToken());
 
-        System.out.println(A / B);
+        BigDecimal result = A.divide(B, 1000, RoundingMode.HALF_UP);
+
+        System.out.println(result.toPlainString());
     }
 }
